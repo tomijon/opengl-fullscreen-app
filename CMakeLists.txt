@@ -6,10 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(SOURCES
 	src/main.cpp
+	src/mesh.hpp
+	src/mesh.cpp
+	src/window.hpp
+	src/window.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-
 
 # GLAD
 include(FetchContent)
@@ -34,7 +37,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
-
 
 # Platform Specific OpenGL Lib
 if(WIN32)
