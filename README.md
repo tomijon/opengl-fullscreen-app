@@ -1,4 +1,4 @@
-# OpenGL Fullscreen Application Template
+# OpenGL Fullscreen Application Template for C++
 Use this template to get a basic window opened with an OpenGL context attached.
 
 
