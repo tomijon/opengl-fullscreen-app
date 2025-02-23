@@ -3,6 +3,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "window.hpp"
+
 
 const int TARGET_MONITOR = 0;
 
@@ -37,29 +39,25 @@ int main(int argc, char* argv[]) {
     GLFWmonitor* fullscreenMonitor = monitors[TARGET_MONITOR];
     const GLFWvidmode* monitorMeta = glfwGetVideoMode(fullscreenMonitor);
 
-    GLFWwindow* window = glfwCreateWindow(monitorMeta->width, monitorMeta->height, "", fullscreenMonitor, nullptr);
+    /*GLFWwindow* window = glfwCreateWindow(monitorMeta->width, monitorMeta->height, "", fullscreenMonitor, nullptr);
     if (!window) {
         std::cerr << "Failed to create window\n";
         glfwTerminate();
         return -1;
-    }
+    }*/
 
-    glfwMakeContextCurrent(window);
+    Windows::Window window(0, 0, "App", fullscreenMonitor, nullptr);
+    window.MakeThisContext();
+
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cerr << "Failed to initialize GLAD\n";
         return -1;
     }
 
-    while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT);
+    while (window.IsOpen()) {
+        window.Update();
 
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE)) {
-            quit();
-            return 0;
-        }
-
-        glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
