@@ -29,6 +29,7 @@ namespace Windows {
 		void SetFullscreen();
 		void SetBorderless();
 		void SetWindowed();
+		void SetWindow(GLFWwindow* newWindow);
 
 		GLFWwindow* window;
 		GLFWwindow* shared;

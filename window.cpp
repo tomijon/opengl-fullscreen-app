@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <GLFW/glfw3.h>
 
 #include "window.hpp"
@@ -32,20 +34,19 @@ void Window::SetWindowMode(WindowMode targetMode) {
 	switch (targetMode) {
 	case WindowMode::FULLSCREEN:
 		SetFullscreen();
-		return;
+		break;
 
 	case WindowMode::BORDERLESS:
 		SetBorderless();
-		return;
+		break;
 
 	case WindowMode::WINDOWED:
 		SetWindowed();
-		return;
+		break;
 
 	default:
 		;
 	}
-
 	mode = targetMode;
 }
 
@@ -67,6 +68,12 @@ void Window::Update() {
 		mode = WindowMode::CLOSED;
 	}
 
+	if (glfwGetKey(window, GLFW_KEY_F11)) {
+		if (mode == WindowMode::FULLSCREEN) SetWindowMode(WindowMode::WINDOWED);
+		else SetWindowMode(WindowMode::FULLSCREEN);
+	}
+
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glfwSwapBuffers(window);
 }
@@ -82,20 +89,36 @@ void Window::SetFullscreen() {
 	const char* title = glfwGetWindowTitle(window);
 
 	GLFWwindow* newWindow = glfwCreateWindow(monitorSettings->width, monitorSettings->height,
-		title, monitor, shared);
-	glfwDestroyWindow(window);
-	window = newWindow;
+		title, monitor, nullptr);
+	SetWindow(newWindow);
 }
 
 
 void Window::SetBorderless() {
-
 }
 
 
 void Window::SetWindowed() {
+	const GLFWvidmode* monitorSettings = glfwGetVideoMode(monitor);
+	const char* title = glfwGetWindowTitle(window);
 
+	glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+	glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+
+	GLFWwindow* newWindow = glfwCreateWindow(0.9f * monitorSettings->width, 0.9f * monitorSettings->height,
+		title, nullptr, nullptr);
+	SetWindow(newWindow);
 }
 
+
+void Window::SetWindow(GLFWwindow* newWindow) {
+	bool isContext = glfwGetCurrentContext() == window;
+
+	glfwDestroyWindow(window);
+
+	window = newWindow;
+	if (isContext) MakeThisContext();
+}
 
 
