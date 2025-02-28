@@ -36,3 +36,10 @@ run-debug.bat        // Runs the debug mode application.
 ```
 
 Both `run-release.bat` and `run-debug.bat` call the respective `build-mode.bat` files if the release and debug modes cannot be found. `build-release.bat` and `build-debug.bat` call `setup.bat` if the `build/` folder does not exist.
+
+### Third Party Libraries
+
+This project uses a number of third party libraries and are fetched automatically by CMake. These are
+
+- Glad (for OpenGL bindings) https://glad.dav1d.de/
+- GLFW (For window creation) https://www.glfw.org/
