@@ -1,5 +1,5 @@
 # OpenGL Fullscreen Application Template for C++ (Windows)
-Use this template to get a basic window opened with an OpenGL context attached.
+Use this template to get a basic window opened with an OpenGL context attached. Pressing F11 toggles between FULLSCREEN and WINDOWED mode.
 
 ## Setup and Execution
 
