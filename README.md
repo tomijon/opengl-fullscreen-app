@@ -35,7 +35,7 @@ run-release.bat      // Runs the release mode application.
 run-debug.bat        // Runs the debug mode application.
 ```
 
-Both `run-release.bat` and `run-debug.bat` call the respective `build-mode.bat` files if the release and debug modes cannot be found. `build-release.bat` and `build-debug.bat` call `setup.bat` if the `build/` folder does not exist.
+Both `run-release.bat` and `run-debug.bat` call the respective `build-mode.bat` files if the release and debug mode builds cannot be found. `build-release.bat` and `build-debug.bat` call `setup.bat` if the `build/` folder does not exist.
 
 ### Third Party Libraries
 
